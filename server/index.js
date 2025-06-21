@@ -7,10 +7,10 @@ import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 import path from 'path';
 import fs from 'fs';
-
+import cors from "cors"
 const app = express();
 app.use(helmet(), express.json(), morgan('combined'), rateLimit({ windowMs: 60000, max: 30 }));
-
+app.use(cors())
 const ClipSchema = z.object({
   url: z.string().url(),
   quality: z.number().int().positive().optional(),
